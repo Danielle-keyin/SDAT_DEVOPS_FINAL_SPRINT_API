@@ -1,4 +1,7 @@
-package com.keyin.exception;
+package com.keyin.aviation.exception;
 
-public class ResourceNotFoundException {
+public class ResourceNotFoundException extends RuntimeException {
+    public ResourceNotFoundException(String message) {
+        super(message);
+    }
 }
