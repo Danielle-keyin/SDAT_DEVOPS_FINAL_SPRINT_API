@@ -7,5 +7,5 @@ import java.util.List;
 
 public interface GateRepository extends JpaRepository<Gate, Long> {
 
-    List<Gate> findByAirportId(Long airportId);
+    List<Gate> findByAirport_CodeIgnoreCase(String code);
 }

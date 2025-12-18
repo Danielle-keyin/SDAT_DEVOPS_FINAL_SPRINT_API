@@ -83,10 +83,15 @@ public class FlightService {
         return flights.stream().map(this::toResponseDTO).collect(Collectors.toList());
     }
 
-
     private FlightResponseDTO toResponseDTO(Flight flight) {
         return new FlightResponseDTO(
                 flight.getId(),
+
+                flight.getAirport() != null ? flight.getAirport().getId() : null,
+                flight.getAirline() != null ? flight.getAirline().getId() : null,
+                flight.getAircraft() != null ? flight.getAircraft().getId() : null,
+                flight.getGate() != null ? flight.getGate().getId() : null,
+
                 flight.getFlightNumber(),
                 flight.getAirline() != null ? flight.getAirline().getName() : null,
                 flight.getType() != null ? flight.getType().name() : null,
@@ -105,7 +110,6 @@ public class FlightService {
         flight.setDestination(request.getDestination());
         flight.setScheduledTime(request.getScheduledTime());
 
-        // Normalize enums safely
         flight.setType(parseFlightType(request.getType()));
         flight.setStatus(parseFlightStatus(request.getStatus()));
 

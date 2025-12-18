@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/gates")
+@RequestMapping("/api")
 public class GateController {
 
     private final GateService gateService;
@@ -17,28 +17,33 @@ public class GateController {
         this.gateService = gateService;
     }
 
-    @GetMapping
+    @GetMapping("/gates")
     public List<Gate> getAllGates() {
         return gateService.getAllGates();
     }
 
-    @GetMapping("/{id}")
+    @GetMapping("/gates/{id}")
     public Gate getGateById(@PathVariable Long id) {
         return gateService.getGateById(id);
     }
 
-    @PostMapping
+    @GetMapping("/airports/{airportCode}/gates")
+    public List<Gate> getGatesByAirportCode(@PathVariable String airportCode) {
+        return gateService.getGatesByAirportCode(airportCode);
+    }
+
+    @PostMapping("/gates")
     @ResponseStatus(HttpStatus.CREATED)
     public Gate createGate(@RequestBody Gate gate) {
         return gateService.createGate(gate);
     }
 
-    @PutMapping("/{id}")
+    @PutMapping("/gates/{id}")
     public Gate updateGate(@PathVariable Long id, @RequestBody Gate gate) {
         return gateService.updateGate(id, gate);
     }
 
-    @DeleteMapping("/{id}")
+    @DeleteMapping("/gates/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void deleteGate(@PathVariable Long id) {
         gateService.deleteGate(id);
